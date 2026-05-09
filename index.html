@@ -21,34 +21,38 @@
     </div>
 
     <nav>
-        <div class="container nav-content" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="container nav-content">
             <div class="logo">ELITE<span>FINANCE</span></div>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="#inicio">Inicio</a>
                 <a href="#nosotros">Nosotros</a>
                 <a href="#servicios">Servicios</a>
                 <a href="#mercados">Mercados</a>
+                <button class="cta-button mobile-cta"
+                    onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">Contacto</button>
             </div>
-            <button class="cta-button"
-                onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">Contacto</button>
+            <div class="nav-actions">
+                <button class="cta-button desktop-cta"
+                    onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">Contacto</button>
+                <button class="menu-toggle" id="menuToggle">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
     <header class="hero section" id="inicio">
         <div class="container hero-content">
-            <h1 style="font-size: 4rem; color: var(--accent-color); margin-bottom: 2rem;">Asesoría Financiera de <span
-                    style="color: var(--primary-color);">Alto Nivel</span></h1>
-            <p
-                style="font-size: 1.1rem; color: var(--text-secondary); max-width: 500px; margin-bottom: 3rem; line-height: 2;">
+            <h1 class="hero-title">Asesoría Financiera de <span class="text-primary">Alto Nivel</span></h1>
+            <p class="hero-description">
                 Transformamos la complejidad financiera en estrategias claras y rentables. Soluciones integrales para
                 inversores que buscan excelencia y resultados medibles.
             </p>
-            <div style="display: flex; gap: 1.5rem;">
+            <div class="hero-btns">
                 <button class="cta-button"
                     onclick="document.getElementById('servicios').scrollIntoView({behavior: 'smooth'})">Nuestros
                     Servicios</button>
-                <button class="cta-button"
-                    style="background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color);"
+                <button class="cta-button btn-outline"
                     onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">Consultoría
                     Gratuita</button>
             </div>
@@ -62,14 +66,14 @@
                     <img src="elite_finance_team_group.png" alt="Nuestro Equipo" class="about-img">
                 </div>
                 <div>
-                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Expertos en su <span>Crecimiento</span></h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                    <h2 class="section-title">Expertos en su <span>Crecimiento</span></h2>
+                    <p class="section-description">
                         Somos un equipo multidisciplinario de analistas financieros y gestores de patrimonio con más de
                         15 años de experiencia en los mercados internacionales. Nuestra misión es democratizar el acceso
                         a inversiones sofisticadas.
                     </p>
-                    <div class="glass-card">
-                        <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">+500M</h3>
+                    <div class="glass-card stat-card">
+                        <h3 class="stat-number">+500M</h3>
                         <p>Capital Gestionado</p>
                     </div>
                 </div>
@@ -79,18 +83,14 @@
 
     <section class="section" id="mercados" style="background: var(--surface-color);">
         <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
-                <div>
-                    <h2 style="font-size: 2rem; color: var(--accent-color); margin: 0;">Análisis de <span
-                            style="color: var(--primary-color);">Mercado</span></h2>
-                    <p style="color: var(--text-secondary); margin-top: 0.5rem;">Inteligencia de datos institucional en
-                        tiempo real.</p>
+            <div class="market-header">
+                <div class="market-title-area">
+                    <h2 class="market-title">Análisis de <span class="text-primary">Mercado</span></h2>
+                    <p class="market-subtitle">Inteligencia de datos institucional en tiempo real.</p>
                 </div>
-                <div style="padding: 1rem; border-left: 2px solid var(--primary-color);">
-                    <div
-                        style="font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">
-                        Market Context</div>
-                    <div style="font-weight: 700; color: var(--accent-color);">BVQ // BVG (Ecuador)</div>
+                <div class="market-badge">
+                    <div class="badge-label">Market Context</div>
+                    <div class="badge-value">BVQ // BVG (Ecuador)</div>
                 </div>
             </div>
 
@@ -98,8 +98,7 @@
                 <div class="market-visuals" id="chartContainer">
                     <!-- Bars injected by JS -->
                 </div>
-                <div
-                    style="display: flex; justify-content: space-between; margin-top: 1.5rem; color: var(--text-secondary); font-size: 0.8rem; font-family: 'Inter', sans-serif;">
+                <div class="chart-labels">
                     <span>APERTURA</span><span>TRADING</span><span>VOLUMEN</span><span>CIERRE</span>
                 </div>
             </div>
@@ -108,11 +107,10 @@
 
     <section class="section" id="equipo">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 5rem;">
-                <h2 style="font-size: 2.5rem; color: var(--accent-color);">Nuestro <span>Equipo</span></h2>
-                <div style="width: 50px; height: 3px; background: var(--primary-color); margin: 1.5rem auto;"></div>
-                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Liderazgo estratégico y
-                    experiencia comprobada en consultoría financiera.</p>
+            <div class="section-header center">
+                <h2 class="section-title text-accent">Nuestro <span>Equipo</span></h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Liderazgo estratégico y experiencia comprobada en consultoría financiera.</p>
             </div>
 
             <div class="team-grid">
@@ -147,7 +145,7 @@
 
     <section class="section" id="servicios">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 4rem;">Nuestros <span>Servicios</span></h2>
+            <h2 class="section-title center-text">Nuestros <span>Servicios</span></h2>
             <div class="services-grid">
                 <div class="glass-card service-card">
                     <i data-lucide="trending-up"></i>
@@ -204,24 +202,23 @@
     <section class="section contact-section" id="contacto">
         <div class="container">
             <div class="contact-grid">
-                <div>
-                    <h2 style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 2rem;">Inicie su Camino a
-                        la <span>Inversión</span></h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 3rem; line-height: 2;">
+                <div class="contact-info">
+                    <h2 class="contact-title">Inicie su Camino a la <span>Inversión</span></h2>
+                    <p class="contact-description">
                         Dé el primer paso hacia sus objetivos financieros. Complete el formulario y uno de nuestros
                         asesores senior se pondrá en contacto con usted en menos de 24 horas.
                     </p>
-                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-secondary);">
-                            <i data-lucide="mail" style="color: var(--primary-color);"></i>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i data-lucide="mail"></i>
                             <span>estefany.naad@gmail.com</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-secondary);">
-                            <i data-lucide="phone" style="color: var(--primary-color);"></i>
+                        <div class="contact-method">
+                            <i data-lucide="phone"></i>
                             <span>+593 99 776 6325</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-secondary);">
-                            <i data-lucide="map-pin" style="color: var(--primary-color);"></i>
+                        <div class="contact-method">
+                            <i data-lucide="map-pin"></i>
                             <span>Riobamba, Ecuador</span>
                         </div>
                     </div>
@@ -241,14 +238,14 @@
                     </div>
                     <div class="form-group">
                         <label>Tipo de Asesoría</label>
-                        <select style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;">
+                        <select class="form-select">
                             <option>Inversión Bursátil</option>
                             <option>Planificación de Jubilación</option>
                             <option>Gestión de Patrimonio</option>
                             <option>Consultoría Empresarial</option>
                         </select>
                     </div>
-                    <button type="submit" class="cta-button" style="width: 100%; padding: 1.2rem;">Enviar
+                    <button type="submit" class="cta-button form-submit">Enviar
                         Solicitud</button>
                 </form>
             </div>
@@ -263,7 +260,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Elite Finance. Todos los derechos reservados.</p>
-            <p style="font-size: 0.7rem; margin-top: 1rem;">La inversión en mercados financieros conlleva riesgos.
+            <p class="footer-disclaimer">La inversión en mercados financieros conlleva riesgos.
                 Consulte con un profesional antes de invertir.</p>
         </div>
     </footer>

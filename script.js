@@ -30,7 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderChart() {
         chartContainer.innerHTML = '';
-        for (let i = 0; i < 35; i++) {
+        // Adjust bar count based on width
+        const barCount = window.innerWidth < 480 ? 15 : (window.innerWidth < 768 ? 20 : 35);
+        
+        for (let i = 0; i < barCount; i++) {
             const height = Math.floor(Math.random() * 80) + 10;
             const rand = Math.random();
             let color = '#e2e8f0'; // Default gray
@@ -141,5 +144,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+    });
+
+    // 6. Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const menuIcon = menuToggle.querySelector('i');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Toggle icon
+            const isActive = navLinks.classList.contains('active');
+            if (isActive) {
+                menuToggle.innerHTML = '<i data-lucide="x"></i>';
+            } else {
+                menuToggle.innerHTML = '<i data-lucide="menu"></i>';
+            }
+            lucide.createIcons();
+        });
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i data-lucide="menu"></i>';
+                lucide.createIcons();
+            });
+        });
+    }
+
+    // 7. Navbar scroll effect
+    const nav = document.querySelector('nav');
+    const tickerWrap = document.querySelector('ticker-wrap');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            nav.style.top = '0';
+            nav.style.padding = '0.5rem 0';
+            nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+        } else {
+            if (window.innerWidth > 768) {
+                nav.style.top = '41px';
+            } else {
+                nav.style.top = '0';
+            }
+            nav.style.padding = '0.8rem 0';
+            nav.style.boxShadow = 'none';
+        }
+    });
+
+    // Handle resize for nav position
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 768) {
+            nav.style.top = '0';
+        } else if (window.scrollY <= 50) {
+            nav.style.top = '41px';
+        }
+        renderChart();
     });
 });
