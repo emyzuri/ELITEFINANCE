@@ -161,16 +161,135 @@ h3,
 
 /* Navigation */
 nav {
-    position: fixed;
+    position: sticky;
     top: 41px;
-    /* Height of the ticker-wrap */
     width: 100%;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--bg-color);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--glass-border);
     padding: 0.8rem 0;
     transition: var(--transition);
+}
+
+.sub-nav {
+    background: #121212;
+    border-bottom: 1px solid #333;
+    padding: 0.8rem 0;
+    font-size: 0.9rem;
+}
+
+.sub-nav-content {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.sub-nav-content a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.sub-nav-content a:hover, .sub-nav-content a.active {
+    color: #00ff88;
+}
+
+.markets-dashboard {
+    /* Modo Normal (Light Mode) */
+    background: #ffffff;
+    color: #0f172a;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+[data-theme="dark"] .markets-dashboard {
+    /* Modo Oscuro (Dark Mode) */
+    background: #0B1120; /* Azul marino */
+    color: #ffffff;
+    border-bottom: 1px solid #1e293b;
+}
+
+.dashboard-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.dashboard-title {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    white-space: nowrap;
+    padding-right: 1.5rem;
+    border-right: 1px solid #e2e8f0;
+}
+
+[data-theme="dark"] .dashboard-title {
+    color: #ffffff;
+    border-right: 1px solid #1e293b;
+}
+
+.dashboard-scroll {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    width: 100%;
+}
+
+.dashboard-scroll::-webkit-scrollbar { display: none; }
+
+.market-card-mini {
+    display: flex;
+    flex-direction: column;
+    min-width: 140px;
+    cursor: pointer;
+}
+
+.m-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 2px;
+}
+
+[data-theme="dark"] .m-name {
+    color: #60a5fa; /* Azul claro para contraste en oscuro */
+}
+
+.m-val {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+[data-theme="dark"] .m-val {
+    color: #ffffff;
+}
+
+.m-change {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.m-change.up { color: #10b981; }
+.m-change.down { color: #ef4444; }
+
+.sparkline-container {
+    height: 30px;
+    width: 80px;
+    margin-top: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.sparkline {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .nav-content {

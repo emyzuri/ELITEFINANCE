@@ -26,27 +26,26 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTicker();
 
     // 1.1 Ecuador Market Table
-    const globalStocks = [
-        { name: 'Apple Inc (AAPL)', price: '293.32', change: '+2.05%', up: true },
-        { name: 'Tesla Inc (TSLA)', price: '428.35', change: '+4.02%', up: true },
-        { name: 'Amazon.com Inc (AMZN)', price: '272.68', change: '+0.56%', up: true },
-        { name: 'Microsoft Corp (MSFT)', price: '415.12', change: '-1.34%', up: false },
-        { name: 'Boeing Co (BA)', price: '237.36', change: '+2.74%', up: true },
-        { name: 'Walt Disney Co (DIS)', price: '108.02', change: '-0.59%', up: false },
-        { name: 'McDonald\'s Corp (MCD)', price: '275.75', change: '-2.80%', up: false },
-        { name: 'JPMorgan Chase (JPM)', price: '302.10', change: '-1.36%', up: false }
+    const ecuadorStocks = [
+        { name: 'CORPORACIÓN FAVORITA', price: '2.030', change: '+4.64%', cap: '1,713.44 M', up: true },
+        { name: 'BEVERAGE BRAND & PAY', price: '50.00', change: '+1.01%', cap: '1,024.52 M', up: true },
+        { name: 'HOLCIM ECUADOR S.A.', price: '49.00', change: '+8.89%', cap: '1,013.86 M', up: true },
+        { name: 'BANCO BOLIVARIANO', price: '1.500', change: '+3.45%', cap: '735 M', up: true },
+        { name: 'INVERSANCARLOS S.A.', price: '2.880', change: '-2.37%', cap: '158 M', up: false },
+        { name: 'RETRATOREC S.A.', price: '4.300', change: '+7.50%', cap: '1.5 M', up: true },
+        { name: 'BANCO DEL AUSTRO', price: '0.500', change: '+16.28%', cap: '0', up: true }
     ];
 
     function renderMarketTable() {
         const tableBody = document.getElementById('ecuadorMarketBody');
         if (!tableBody) return;
 
-        tableBody.innerHTML = globalStocks.map(stock => `
+        tableBody.innerHTML = ecuadorStocks.map(stock => `
             <tr>
                 <td class="company-name">${stock.name}</td>
                 <td>$${stock.price}</td>
                 <td><span class="market-trend ${stock.up ? 'trend-up' : 'trend-down'}">${stock.change}</span></td>
-                <td>N/A</td>
+                <td>${stock.cap}</td>
                 <td><i data-lucide="${stock.up ? 'trending-up' : 'trending-down'}" class="${stock.up ? 'trend-up' : 'trend-down'}"></i></td>
             </tr>
         `).join('');
@@ -54,6 +53,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     renderMarketTable();
+
+    // 1.2 US Markets Dashboard Logic
+    function initDashboard() {
+        const configs = [
+            { id: 'sp500Chart', color: '#10b981', data: [7320, 7350, 7340, 7380, 7370, 7398] },
+            { id: 'dow30Chart', color: '#10b981', data: [49650, 49630, 49640, 49620, 49615, 49609] },
+            { id: 'nasdaqChart', color: '#10b981', data: [25800, 26000, 25950, 26150, 26100, 26247] },
+            { id: 'russellChart', color: '#10b981', data: [2830, 2850, 2845, 2860, 2855, 2861] },
+            { id: 'vixChart', color: '#ef4444', data: [17.0, 17.2, 17.1, 17.3, 17.2, 17.19] }
+        ];
+
+        configs.forEach(config => {
+            const canvas = document.getElementById(config.id);
+            if (!canvas) return;
+            
+            new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: config.data.map((_, i) => i),
+                    datasets: [{
+                        data: config.data,
+                        borderColor: config.color,
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { display: false }, y: { display: false } }
+                }
+            });
+        });
+
+        // Live Update Interval
+        setInterval(() => {
+            const cards = document.querySelectorAll('.market-card-mini');
+            cards.forEach(card => {
+                const valEl = card.querySelector('.m-val');
+                if (!valEl) return;
+
+                const current = parseFloat(valEl.innerText.replace(/,/g, ''));
+                const change = (Math.random() - 0.5) * 1.0;
+                const newVal = (current + change).toFixed(2);
+                
+                valEl.innerText = newVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                
+                // Subtler color feedback
+                valEl.style.color = change > 0 ? '#10b981' : '#ef4444';
+                setTimeout(() => valEl.style.color = '', 800);
+            });
+        }, 3000);
+    }
+
+    // Initialize when everything is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    } else {
+        initDashboard();
+    }
 
     // 2. Real Chart with Chart.js
     const ctx = document.getElementById('marketChart');

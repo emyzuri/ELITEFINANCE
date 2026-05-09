@@ -28,7 +28,6 @@
                 <a href="#inicio">Inicio</a>
                 <a href="#nosotros">Nosotros</a>
                 <a href="#equipo">Equipo</a>
-                <a href="#mercados">Mercados</a>
                 <a href="#inversion">Inversión</a>
                 <a href="#consulta">Consulta</a>
             </div>
@@ -42,6 +41,65 @@
             </div>
         </div>
     </nav>
+
+    <!-- Yahoo Style Sub-nav -->
+    <div class="sub-nav">
+        <div class="container sub-nav-content">
+            <a href="#">My Portfolio</a>
+            <a href="#">News</a>
+            <a href="#mercados" class="active">Markets</a>
+            <a href="#">Research</a>
+            <a href="#">Community</a>
+            <a href="#">Personal Finance</a>
+            <a href="#">Videos</a>
+            <a href="#">Watch Now</a>
+        </div>
+    </div>
+
+    <!-- US Markets Dashboard -->
+    <div class="markets-dashboard" id="mercados">
+        <div class="container">
+            <div class="dashboard-container">
+                <div class="dashboard-title">
+                    <i data-lucide="activity"></i>
+                    <span>US Markets</span>
+                    <i data-lucide="chevron-down"></i>
+                </div>
+                <div class="dashboard-scroll">
+                    <div class="market-card-mini">
+                        <div class="m-name">S&P 500</div>
+                        <div class="m-val">7,398.93</div>
+                        <div class="m-change up">+61.82 +0.84%</div>
+                        <div class="sparkline-container"><canvas class="sparkline" id="sp500Chart"></canvas></div>
+                    </div>
+                    <div class="market-card-mini">
+                        <div class="m-name">Dow 30</div>
+                        <div class="m-val">49,609.16</div>
+                        <div class="m-change up">+12.19 +0.02%</div>
+                        <div class="sparkline-container"><canvas class="sparkline" id="dow30Chart"></canvas></div>
+                    </div>
+                    <div class="market-card-mini">
+                        <div class="m-name">Nasdaq</div>
+                        <div class="m-val">26,247.08</div>
+                        <div class="m-change up">+440.88 +1.71%</div>
+                        <div class="sparkline-container"><canvas class="sparkline" id="nasdaqChart"></canvas></div>
+                    </div>
+                    <div class="market-card-mini">
+                        <div class="m-name">Russell 2000</div>
+                        <div class="m-val">2,861.21</div>
+                        <div class="m-change up">+21.58 +0.76%</div>
+                        <div class="sparkline-container"><canvas class="sparkline" id="russellChart"></canvas></div>
+                    </div>
+                    <div class="market-card-mini">
+                        <div class="m-name">VIX</div>
+                        <div class="m-val">17.19</div>
+                        <div class="m-change up">+0.11 +0.64%</div>
+                        <div class="sparkline-container"><canvas class="sparkline" id="vixChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <header class="hero section reveal" id="inicio">
         <div class="container hero-content">
@@ -62,10 +120,16 @@
                 <div>
                     <h2 class="section-title">Expertos en <span>Inversiones Estratégicas</span></h2>
                     <p class="section-description">
-                        Somos una empresa enfocada en el mundo de las inversiones financieras, especializada en activos y acciones de alta volatilidad. Nuestro propósito es brindar oportunidades estratégicas dentro de mercados dinámicos, aprovechando los movimientos del mercado para generar crecimiento y nuevas posibilidades de inversión.
+                        Somos una empresa enfocada en el mundo de las inversiones financieras, especializada en activos
+                        y acciones de alta volatilidad. Nuestro propósito es brindar oportunidades estratégicas dentro
+                        de mercados dinámicos, aprovechando los movimientos del mercado para generar crecimiento y
+                        nuevas posibilidades de inversión.
                     </p>
                     <p class="section-description">
-                        Contamos con un enfoque moderno y analítico, basado en el estudio constante de tendencias, gestión del riesgo y toma de decisiones inteligentes. Nos apasiona el mercado financiero y trabajamos diariamente para ofrecer información, estrategias y acompañamiento en un entorno donde la velocidad y la precisión marcan la diferencia.
+                        Contamos con un enfoque moderno y analítico, basado en el estudio constante de tendencias,
+                        gestión del riesgo y toma de decisiones inteligentes. Nos apasiona el mercado financiero y
+                        trabajamos diariamente para ofrecer información, estrategias y acompañamiento en un entorno
+                        donde la velocidad y la precisión marcan la diferencia.
                     </p>
                     <div class="glass-card stat-card">
                         <h3 class="stat-number">+10 Años</h3>
@@ -76,12 +140,13 @@
         </div>
     </section>
 
-    <section class="section reveal" id="mercados" style="background: var(--surface-color);">
+    <!-- Ecuador Markets Table -->
+    <section class="section reveal" id="mercados-locales" style="background: var(--surface-color);">
         <div class="container">
             <div class="market-header">
                 <div class="market-title-area">
-                    <h2 class="section-title">Mercado <span>Global</span></h2>
-                    <p class="market-subtitle">Cotizaciones en tiempo real desde Investing.com</p>
+                    <h2 class="section-title">Mercado <span>Local</span></h2>
+                    <p class="market-subtitle">Cotizaciones en tiempo real de la Bolsa de Valores</p>
                 </div>
                 <div class="market-badge">
                     <div class="badge-label">Origen de Datos</div>
@@ -155,13 +220,15 @@
         <div class="container">
             <div class="section-header center">
                 <h2 class="section-title">Nuestros <span>Servicios & Asesoría</span></h2>
-                <p class="section-subtitle">Soluciones diseñadas para navegar con éxito en mercados de alta volatilidad.</p>
+                <p class="section-subtitle">Soluciones diseñadas para navegar con éxito en mercados de alta volatilidad.
+                </p>
             </div>
             <div class="services-grid">
                 <div class="glass-card service-card">
                     <i data-lucide="trending-up"></i>
                     <h3>Asesoría en Mercados Bursátiles</h3>
-                    <p>Orientación especializada en la compra y venta de acciones en las bolsas de Quito y Guayaquil, optimizando el retorno en activos dinámicos.</p>
+                    <p>Orientación especializada en la compra y venta de acciones en las bolsas de Quito y Guayaquil,
+                        optimizando el retorno en activos dinámicos.</p>
                     <ul class="service-list">
                         <li>Análisis de acciones locales</li>
                         <li>Selección de sectores estratégicos</li>
@@ -171,7 +238,8 @@
                 <div class="glass-card service-card">
                     <i data-lucide="shield-alert"></i>
                     <h3>Gestión de Activos Volátiles</h3>
-                    <p>Estrategias avanzadas para capitalizar movimientos bruscos del mercado, transformando el riesgo en oportunidad de crecimiento.</p>
+                    <p>Estrategias avanzadas para capitalizar movimientos bruscos del mercado, transformando el riesgo
+                        en oportunidad de crecimiento.</p>
                     <ul class="service-list">
                         <li>Trading de alta frecuencia</li>
                         <li>Protección contra caídas</li>
@@ -181,7 +249,8 @@
                 <div class="glass-card service-card">
                     <i data-lucide="line-chart"></i>
                     <h3>Acompañamiento Estratégico</h3>
-                    <p>Le brindamos la información y el análisis técnico necesario para tomar decisiones inteligentes y precisas en el momento justo.</p>
+                    <p>Le brindamos la información y el análisis técnico necesario para tomar decisiones inteligentes y
+                        precisas en el momento justo.</p>
                     <ul class="service-list">
                         <li>Informes de mercado diarios</li>
                         <li>Consultoría personalizada</li>
