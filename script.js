@@ -26,26 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTicker();
 
     // 1.1 Ecuador Market Table
-    const ecuadorStocks = [
-        { name: 'CORPORACIÓN FAVORITA', price: '2.030', change: '+4.64%', cap: '1,713.44 M', up: true },
-        { name: 'BEVERAGE BRAND & PAY', price: '50.00', change: '+1.01%', cap: '1,024.52 M', up: true },
-        { name: 'HOLCIM ECUADOR S.A.', price: '49.00', change: '+8.89%', cap: '1,013.86 M', up: true },
-        { name: 'BANCO BOLIVARIANO', price: '1.500', change: '+3.45%', cap: '735 M', up: true },
-        { name: 'INVERSANCARLOS S.A.', price: '2.880', change: '-2.37%', cap: '158 M', up: false },
-        { name: 'RETRATOREC S.A.', price: '4.300', change: '+7.50%', cap: '1.5 M', up: true },
-        { name: 'BANCO DEL AUSTRO', price: '0.500', change: '+16.28%', cap: '0', up: true }
+    const globalStocks = [
+        { name: 'Apple Inc (AAPL)', price: '293.32', change: '+2.05%', up: true },
+        { name: 'Tesla Inc (TSLA)', price: '428.35', change: '+4.02%', up: true },
+        { name: 'Amazon.com Inc (AMZN)', price: '272.68', change: '+0.56%', up: true },
+        { name: 'Microsoft Corp (MSFT)', price: '415.12', change: '-1.34%', up: false },
+        { name: 'Boeing Co (BA)', price: '237.36', change: '+2.74%', up: true },
+        { name: 'Walt Disney Co (DIS)', price: '108.02', change: '-0.59%', up: false },
+        { name: 'McDonald\'s Corp (MCD)', price: '275.75', change: '-2.80%', up: false },
+        { name: 'JPMorgan Chase (JPM)', price: '302.10', change: '-1.36%', up: false }
     ];
 
     function renderMarketTable() {
         const tableBody = document.getElementById('ecuadorMarketBody');
         if (!tableBody) return;
 
-        tableBody.innerHTML = ecuadorStocks.map(stock => `
+        tableBody.innerHTML = globalStocks.map(stock => `
             <tr>
                 <td class="company-name">${stock.name}</td>
                 <td>$${stock.price}</td>
                 <td><span class="market-trend ${stock.up ? 'trend-up' : 'trend-down'}">${stock.change}</span></td>
-                <td>${stock.cap}</td>
+                <td>N/A</td>
                 <td><i data-lucide="${stock.up ? 'trending-up' : 'trending-down'}" class="${stock.up ? 'trend-up' : 'trend-down'}"></i></td>
             </tr>
         `).join('');
