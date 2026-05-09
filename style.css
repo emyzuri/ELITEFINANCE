@@ -143,9 +143,7 @@ nav {
     padding: 0.5rem;
 }
 
-.mobile-cta {
-    display: none;
-}
+
 
 .logo {
     font-size: 1.6rem;
@@ -705,10 +703,6 @@ footer {
     .menu-toggle {
         display: block;
     }
-
-    .desktop-cta {
-        display: none;
-    }
 }
 
 @media (max-width: 768px) {
@@ -723,16 +717,19 @@ footer {
 
     nav {
         top: 0; /* Default to top if ticker is hidden or we want a simpler header */
+        padding: 0.6rem 0;
     }
 
     .hero {
         padding-top: 8rem;
         padding-bottom: 5rem;
+        height: auto;
     }
 
     .about-grid, .calculator-container, .contact-grid {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 2rem;
     }
 
     .about-grid > div:first-child {
@@ -772,6 +769,20 @@ footer {
         display: inline-block;
         padding-top: 1rem;
     }
+
+    .market-visuals {
+        height: 300px;
+        padding: 1.5rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
 }
 
 @media (max-width: 600px) {
@@ -781,18 +792,45 @@ footer {
     
     nav {
         top: 0 !important;
+        padding: 0.5rem 0;
+    }
+
+    .nav-content {
+        padding: 0 0.5rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+
+    .contact-form {
+        gap: 1rem;
+    }
+
+    .form-group input, .form-group textarea, .form-select {
+        padding: 0.8rem;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    .market-visuals {
+        height: 250px;
     }
 }
 
