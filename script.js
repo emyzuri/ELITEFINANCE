@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.style.padding = '0.5rem 0';
             nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
         } else {
-            if (window.innerWidth > 768) {
+            if (window.innerWidth > 600) {
                 nav.style.top = '41px';
             } else {
                 nav.style.top = '0';
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle resize for nav position
     window.addEventListener('resize', () => {
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 600) {
             nav.style.top = '0';
         } else if (window.scrollY <= 50) {
             nav.style.top = '41px';
