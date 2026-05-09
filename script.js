@@ -2,13 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Market Ticker Logic
     const ticker = document.getElementById('marketTicker');
     const assets = [
-        { name: 'ECUINDEX', price: '1,245.30', change: '+0.45%', up: true },
-        { name: 'FAVORITA', price: '2.14', change: '+1.2%', up: true },
-        { name: 'PICHINCHA', price: '94.50', change: '-0.3%', up: false },
-        { name: 'S&P 500', price: '5,123.44', change: '+1.2%', up: true },
-        { name: 'BTC/USD', price: '64,231', change: '-2.4%', up: false },
-        { name: 'PRODUBANCO', price: '1.05', change: '+0.1%', up: true },
-        { name: 'GOLD', price: '2,341', change: '+0.5%', up: true }
+        { name: 'CORP. FAVORITA', price: '2.030', change: '+4.64%', up: true },
+        { name: 'BANCO PICHINCHA', price: '94.50', change: '-0.3%', up: false },
+        { name: 'HOLCIM ECUADOR', price: '49.00', change: '+8.89%', up: true },
+        { name: 'BANCO BOLIVARIANO', price: '1.500', change: '+3.45%', up: true },
+        { name: 'BEVERAGE BRAND', price: '50.00', change: '+1.01%', up: true },
+        { name: 'BCO. DEL AUSTRO', price: '0.500', change: '+16.28%', up: true },
+        { name: 'S&P 500', price: '5,123.44', change: '+1.2%', up: true }
     ];
 
     function renderTicker() {
@@ -25,45 +25,108 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderTicker();
 
-    // 2. Dynamic Chart Simulation
-    const chartContainer = document.getElementById('chartContainer');
+    // 1.1 Ecuador Market Table
+    const ecuadorStocks = [
+        { name: 'CORPORACIÓN FAVORITA', price: '2.030', change: '+4.64%', cap: '1,713.44 M', up: true },
+        { name: 'BEVERAGE BRAND & PAY', price: '50.00', change: '+1.01%', cap: '1,024.52 M', up: true },
+        { name: 'HOLCIM ECUADOR S.A.', price: '49.00', change: '+8.89%', cap: '1,013.86 M', up: true },
+        { name: 'BANCO BOLIVARIANO', price: '1.500', change: '+3.45%', cap: '735 M', up: true },
+        { name: 'INVERSANCARLOS S.A.', price: '2.880', change: '-2.37%', cap: '158 M', up: false },
+        { name: 'RETRATOREC S.A.', price: '4.300', change: '+7.50%', cap: '1.5 M', up: true },
+        { name: 'BANCO DEL AUSTRO', price: '0.500', change: '+16.28%', cap: '0', up: true }
+    ];
 
-    function renderChart() {
-        chartContainer.innerHTML = '';
-        // Adjust bar count based on width
-        const barCount = window.innerWidth < 480 ? 15 : (window.innerWidth < 768 ? 20 : 35);
-        
-        for (let i = 0; i < barCount; i++) {
-            const height = Math.floor(Math.random() * 80) + 10;
-            const rand = Math.random();
-            let color = '#e2e8f0'; // Default gray
-            
-            if (rand > 0.6) color = 'var(--primary-color)';
-            else if (rand > 0.4) color = 'var(--data-color)';
-            else if (rand < 0.05) color = 'var(--loss-color)';
+    function renderMarketTable() {
+        const tableBody = document.getElementById('ecuadorMarketBody');
+        if (!tableBody) return;
 
-            const bar = document.createElement('div');
-            bar.className = 'chart-bar';
-            bar.style.height = '0%';
-            bar.style.background = color;
-            bar.setAttribute('data-value', `$${(height * 100).toLocaleString()}`);
-            chartContainer.appendChild(bar);
-            
-            setTimeout(() => {
-                bar.style.height = `${height}%`;
-            }, i * 25);
-        }
+        tableBody.innerHTML = ecuadorStocks.map(stock => `
+            <tr>
+                <td class="company-name">${stock.name}</td>
+                <td>$${stock.price}</td>
+                <td><span class="market-trend ${stock.up ? 'trend-up' : 'trend-down'}">${stock.change}</span></td>
+                <td>${stock.cap}</td>
+                <td><i data-lucide="${stock.up ? 'trending-up' : 'trending-down'}" class="${stock.up ? 'trend-up' : 'trend-down'}"></i></td>
+            </tr>
+        `).join('');
+        lucide.createIcons();
     }
 
-    renderChart();
-    // Refresh chart every 5 seconds for "live" feel
-    setInterval(renderChart, 5000);
+    renderMarketTable();
+
+    // 2. Real Chart with Chart.js
+    const ctx = document.getElementById('marketChart');
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Índice de Volatilidad Estratégica',
+                    data: [12, 19, 15, 25, 22, 30, 45],
+                    borderColor: '#1e40af',
+                    backgroundColor: 'rgba(30, 64, 175, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // 2.1 Dark Mode Logic
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // Check for saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        themeToggle.innerHTML = '<i data-lucide="sun"></i>';
+        lucide.createIcons();
+    }
+
+    themeToggle.addEventListener('click', () => {
+        if (body.getAttribute('data-theme') === 'dark') {
+            body.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '<i data-lucide="moon"></i>';
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '<i data-lucide="sun"></i>';
+        }
+        lucide.createIcons();
+    });
+
+    // 2.2 Reveal on Scroll Logic
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
 
     // 3. Investment Calculator
     const initialInput = document.getElementById('initialInv');
     const monthlyInput = document.getElementById('monthlyInv');
     const yearsInput = document.getElementById('years');
-    
+
     const initialVal = document.getElementById('initialInvVal');
     const monthlyVal = document.getElementById('monthlyInvVal');
     const yearsVal = document.getElementById('yearsVal');
@@ -78,12 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Compound interest with monthly contributions formula
         // A = P(1 + r/n)^(nt) + PMT * [((1 + r/n)^(nt) - 1) / (r/n)]
-        
+
         const ratePerMonth = r / n;
         const totalMonths = n * t;
         const futureValuePrincipal = P * Math.pow(1 + ratePerMonth, totalMonths);
         const futureValueContributions = PMT * (Math.pow(1 + ratePerMonth, totalMonths) - 1) / ratePerMonth;
-        
+
         const total = futureValuePrincipal + futureValueContributions;
 
         resultDisplay.textContent = new Intl.NumberFormat('en-US', {
@@ -111,25 +174,41 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const name = contactForm.querySelector('input[placeholder*="Nombre"]').value;
             const email = contactForm.querySelector('input[type="email"]').value;
-            const whatsapp = contactForm.querySelector('input[type="tel"]').value;
+            const whatsapp = contactForm.querySelector('input[placeholder*="WhatsApp"]').value;
             const service = contactForm.querySelector('select').value;
-            
+
+            // Form Validation (Basic)
+            if (!name || !email || !whatsapp) {
+                alert('Por favor complete todos los campos.');
+                return;
+            }
+
             const subject = `Nueva Solicitud de Asesoría - ${name}`;
-            const body = `Hola Estefany,\n\nHas recibido una nueva solicitud desde la web Elite Finance:\n\nNombre: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}\nInterés: ${service}\n\nSaludos.`;
-            
-            // Redirect to mailto
-            window.location.href = `mailto:estefany.naad@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            // Visual feedback
+            const body = `Hola Equipo Elite Finance,\n\nHas recibido una nueva solicitud de inversión:\n\nNombre: ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}\nInterés: ${service}\n\nPor favor contactar a la brevedad.`;
+
+            // Visual feedback - Simulated "Sending"
             const btn = contactForm.querySelector('button');
             const originalText = btn.textContent;
-            btn.textContent = '¡Solicitud Preparada!';
-            btn.style.background = '#10b981';
-            
+            btn.disabled = true;
+            btn.textContent = 'Procesando...';
+
             setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.background = '';
-            }, 3000);
+                // Redirect to mailto (This is the most functional way in a static site)
+                window.location.href = `mailto:estefany.naad@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                btn.textContent = '¡Solicitud Preparada!';
+                btn.style.background = '#10b981';
+                
+                // Show a success alert or message
+                alert(`¡Gracias ${name}! Tu solicitud ha sido preparada. Se abrirá tu aplicación de correo para enviar el mensaje a nuestro equipo.`);
+
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                    contactForm.reset();
+                }, 3000);
+            }, 1000);
         });
     }
 
@@ -154,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            
+
             // Toggle icon
             const isActive = navLinks.classList.contains('active');
             if (isActive) {
@@ -178,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. Navbar scroll effect
     const nav = document.querySelector('nav');
     const tickerWrap = document.querySelector('ticker-wrap');
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             nav.style.top = '0';

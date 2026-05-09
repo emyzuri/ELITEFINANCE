@@ -9,6 +9,7 @@
         content="Lideramos tu camino hacia la libertad financiera con asesoría experta en mercados bursátiles e inversiones inteligentes.">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -26,10 +27,15 @@
             <div class="nav-links" id="navLinks">
                 <a href="#inicio">Inicio</a>
                 <a href="#nosotros">Nosotros</a>
-                <a href="#servicios">Servicios</a>
+                <a href="#equipo">Equipo</a>
                 <a href="#mercados">Mercados</a>
+                <a href="#inversion">Inversión</a>
+                <a href="#consulta">Consulta</a>
             </div>
             <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="Cambiar Tema">
+                    <i data-lucide="moon"></i>
+                </button>
                 <button class="menu-toggle" id="menuToggle">
                     <i data-lucide="menu"></i>
                 </button>
@@ -37,7 +43,7 @@
         </div>
     </nav>
 
-    <header class="hero section" id="inicio">
+    <header class="hero section reveal" id="inicio">
         <div class="container hero-content">
             <h1 class="hero-title">Asesoría Financiera de <span class="text-primary">Alto Nivel</span></h1>
             <p class="hero-description">
@@ -46,67 +52,81 @@
             </p>
             <div class="hero-btns">
                 <button class="cta-button"
-                    onclick="document.getElementById('servicios').scrollIntoView({behavior: 'smooth'})">Nuestros
-                    Servicios</button>
+                    onclick="document.getElementById('equipo').scrollIntoView({behavior: 'smooth'})">Nuestro Equipo</button>
                 <button class="cta-button btn-outline"
-                    onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">Consultoría
-                    Gratuita</button>
+                    onclick="document.getElementById('inversion').scrollIntoView({behavior: 'smooth'})">Calculadora de Inversión</button>
+                <button class="cta-button btn-outline"
+                    onclick="document.getElementById('consulta').scrollIntoView({behavior: 'smooth'})">Consultoría Gratuita</button>
             </div>
         </div>
     </header>
 
-    <section class="section" id="nosotros">
+    <section class="section reveal" id="nosotros">
         <div class="container">
             <div class="about-grid">
                 <div>
                     <img src="elite_finance_team_group.png" alt="Nuestro Equipo" class="about-img">
                 </div>
                 <div>
-                    <h2 class="section-title">Expertos en su <span>Crecimiento</span></h2>
+                    <h2 class="section-title">Expertos en <span>Inversiones Estratégicas</span></h2>
                     <p class="section-description">
-                        Somos un equipo multidisciplinario de analistas financieros y gestores de patrimonio con más de
-                        15 años de experiencia en los mercados internacionales. Nuestra misión es democratizar el acceso
-                        a inversiones sofisticadas.
+                        Somos una empresa enfocada en el mundo de las inversiones financieras, especializada en activos y acciones de alta volatilidad. Nuestro propósito es brindar oportunidades estratégicas dentro de mercados dinámicos, aprovechando los movimientos del mercado para generar crecimiento y nuevas posibilidades de inversión.
+                    </p>
+                    <p class="section-description">
+                        Contamos con un enfoque moderno y analítico, basado en el estudio constante de tendencias, gestión del riesgo y toma de decisiones inteligentes. Nos apasiona el mercado financiero y trabajamos diariamente para ofrecer información, estrategias y acompañamiento en un entorno donde la velocidad y la precisión marcan la diferencia.
                     </p>
                     <div class="glass-card stat-card">
-                        <h3 class="stat-number">+500M</h3>
-                        <p>Capital Gestionado</p>
+                        <h3 class="stat-number">+10 Años</h3>
+                        <p>Experiencia en Mercados</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="mercados" style="background: var(--surface-color);">
+    <section class="section reveal" id="mercados" style="background: var(--surface-color);">
         <div class="container">
             <div class="market-header">
                 <div class="market-title-area">
-                    <h2 class="market-title">Análisis de <span class="text-primary">Mercado</span></h2>
-                    <p class="market-subtitle">Inteligencia de datos institucional en tiempo real.</p>
+                    <h2 class="market-title">Mercado de Acciones <span class="text-primary">Ecuador</span></h2>
+                    <p class="market-subtitle">Cotizaciones en tiempo real de las principales empresas del país.</p>
                 </div>
                 <div class="market-badge">
-                    <div class="badge-label">Market Context</div>
-                    <div class="badge-value">BVQ // BVG (Ecuador)</div>
+                    <div class="badge-label">Origen de Datos</div>
+                    <div class="badge-value">BVQ / BVG</div>
                 </div>
             </div>
 
-            <div class="glass-card">
-                <div class="market-visuals" id="chartContainer">
-                    <!-- Bars injected by JS -->
-                </div>
-                <div class="chart-labels">
-                    <span>APERTURA</span><span>TRADING</span><span>VOLUMEN</span><span>CIERRE</span>
-                </div>
+            <div class="market-table-container glass-card">
+                <table class="market-table">
+                    <thead>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Cotización (USD)</th>
+                            <th>Variación</th>
+                            <th>Capitalización</th>
+                            <th>Tendencia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ecuadorMarketBody">
+                        <!-- Dynamic rows injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="glass-card" style="margin-top: 2rem; min-height: 400px;">
+                <canvas id="marketChart"></canvas>
             </div>
         </div>
     </section>
 
-    <section class="section" id="equipo">
+    <section class="section reveal" id="equipo">
         <div class="container">
             <div class="section-header center">
                 <h2 class="section-title text-accent">Nuestro <span>Equipo</span></h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Liderazgo estratégico y experiencia comprobada en consultoría financiera.</p>
+                <p class="section-subtitle">Liderazgo estratégico y experiencia comprobada en consultoría financiera.
+                </p>
             </div>
 
             <div class="team-grid">
@@ -139,29 +159,47 @@
         </div>
     </section>
 
-    <section class="section" id="servicios">
+    <section class="section reveal" id="servicios">
         <div class="container">
-            <h2 class="section-title center-text">Nuestros <span>Servicios</span></h2>
+            <div class="section-header center">
+                <h2 class="section-title">Nuestros <span>Servicios & Asesoría</span></h2>
+                <p class="section-subtitle">Soluciones diseñadas para navegar con éxito en mercados de alta volatilidad.</p>
+            </div>
             <div class="services-grid">
                 <div class="glass-card service-card">
                     <i data-lucide="trending-up"></i>
-                    <h3>Asesoría Bursátil</h3>
-                    <p>Optimización de portafolios en acciones, ETFs y renta fija.</p>
+                    <h3>Asesoría en Mercados Bursátiles</h3>
+                    <p>Orientación especializada en la compra y venta de acciones en las bolsas de Quito y Guayaquil, optimizando el retorno en activos dinámicos.</p>
+                    <ul class="service-list">
+                        <li>Análisis de acciones locales</li>
+                        <li>Selección de sectores estratégicos</li>
+                        <li>Gestión de dividendos</li>
+                    </ul>
                 </div>
                 <div class="glass-card service-card">
-                    <i data-lucide="shield-check"></i>
-                    <h3>Gestión de Riesgos</h3>
-                    <p>Protección patrimonial y estrategias de cobertura avanzadas.</p>
+                    <i data-lucide="shield-alert"></i>
+                    <h3>Gestión de Activos Volátiles</h3>
+                    <p>Estrategias avanzadas para capitalizar movimientos bruscos del mercado, transformando el riesgo en oportunidad de crecimiento.</p>
+                    <ul class="service-list">
+                        <li>Trading de alta frecuencia</li>
+                        <li>Protección contra caídas</li>
+                        <li>Monitoreo constante de tendencias</li>
+                    </ul>
                 </div>
                 <div class="glass-card service-card">
-                    <i data-lucide="bar-chart-3"></i>
-                    <h3>Análisis de Datos</h3>
-                    <p>Informes detallados basados en modelos algorítmicos propios.</p>
+                    <i data-lucide="line-chart"></i>
+                    <h3>Acompañamiento Estratégico</h3>
+                    <p>Le brindamos la información y el análisis técnico necesario para tomar decisiones inteligentes y precisas en el momento justo.</p>
+                    <ul class="service-list">
+                        <li>Informes de mercado diarios</li>
+                        <li>Consultoría personalizada</li>
+                        <li>Planificación de portafolio</li>
+                    </ul>
                 </div>
             </div>
 
             <!-- Interaction with data -->
-            <div class="calculator-container glass-card">
+            <div class="calculator-container glass-card" id="inversion">
                 <div>
                     <h3>Calculadora de <span>Inversión</span></h3>
                     <p style="margin-bottom: 2rem;">Simula el crecimiento de tu capital en el tiempo.</p>
@@ -195,7 +233,7 @@
         </div>
     </section>
 
-    <section class="section contact-section" id="contacto">
+    <section class="section contact-section reveal" id="consulta">
         <div class="container">
             <div class="contact-grid">
                 <div class="contact-info">
