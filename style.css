@@ -246,8 +246,18 @@ nav {
 .market-card-mini {
     display: flex;
     flex-direction: column;
-    min-width: 140px;
+    min-width: 150px;
     cursor: pointer;
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    flex-shrink: 0;
+}
+
+[data-theme="dark"] .market-card-mini {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .m-name {
